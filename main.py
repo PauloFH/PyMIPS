@@ -8,9 +8,3 @@ class main:
             args.append(LineAsm[x])
         print(args[x])
         print()
-
-    opcode = 0
-    func = 0
-    rd = 0
-    rs = 0
-    rt = 0
