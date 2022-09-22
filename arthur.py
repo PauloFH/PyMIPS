@@ -19,15 +19,28 @@ def asmtoint(asm):
     rd = 0
     rs = 0
     rt = 0
+    shamt = 0
     imm = 0
+    adress = 0
     if (args[0] == "sll"):
         if (len(args) != 4):
             return 0,0,0,0,0,0
         opcode = 0
         func = 0
         rd = 8
+        rs = 9
+        rt = 10
+        shamt = 3
+        FamilyR()
+    if (args[0] == "srl"):
+        if (len(args) != 4):
+            return 0,0,0,0,0,0
+        opcode = 0
+        func = 2
+        rd = 8
         rs = 3
         rt = 10
+        shamt = 0
         FamilyR()
     elif (args[0] == "add"):
         if (len(args) != 4):
@@ -37,6 +50,7 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()
     elif (args[0] == "sub"):
         if (len(args) != 4):
@@ -46,6 +60,7 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()
     elif (args[0] == "and"):
         if (len(args) != 4):
@@ -55,6 +70,7 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()
     elif (args[0] == "or"):
         if (len(args) != 4):
@@ -64,17 +80,78 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()
-    elif (args[0] == "srl"):
-        if (len(args) != 4):
+    elif (args[0] == "jr"):
+        if (len(args) != 1):
             return 0,0,0,0,0,0
         opcode = 0
-        func = 2
+        func = 8
+        rd = 0
+        rs = 8
+        rt = 0
+        shamt = 0
+        FamilyR()
+    elif (args[0] == "mfhi"):
+        if (len(args) != 1):
+            return 0,0,0,0,0,0
+        opcode = 0
+        func = 16
         rd = 8
         rs = 0
-        rt = 10
-        imn = 3
+        rt = 0
+        shamt = 0
         FamilyR()
+    elif (args[0] == "mflo"):
+        if (len(args) != 1):
+            return 0,0,0,0,0,0
+        opcode = 0
+        func = 18
+        rd = 0
+        rs = 8
+        rt = 0
+        shamt = 0
+        FamilyR()  
+    elif (args[0] == "mult"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 0
+        func = 24
+        rd = 0
+        rs = 9
+        rt = 10
+        shamt = 0
+        FamilyR()
+    elif (args[0] == "multu"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 0
+        func = 25
+        rd = 0
+        rs = 9
+        rt = 10
+        shamt = 0
+        FamilyR()
+    elif (args[0] == "div"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 0
+        func = 26
+        rd = 0
+        rs = 9
+        rt = 10
+        shamt = 0
+        FamilyR()
+    elif (args[0] == "divu"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 0
+        func = 27
+        rd = 0
+        rs = 9
+        rt = 10
+        shamt = 0
+        FamilyR()                  
     elif (args[0] == "addu"):
         if (len(args) != 4):
             return 0,0,0,0,0,0
@@ -83,6 +160,7 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()
     elif (args[0] == "subu"):
         if (len(args) != 4):
@@ -92,6 +170,7 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()
     elif (args[0] == "slt"):
         if (len(args) != 4):
@@ -101,6 +180,7 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()
     elif (args[0] == "sltu"):
         if (len(args) != 4):
@@ -110,6 +190,7 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()
     elif (args[0] == "mul"):
         if (len(args) != 4):
@@ -119,75 +200,112 @@ def asmtoint(asm):
         rd = 8
         rs = 9
         rt = 10
+        shamt = 0
         FamilyR()                        
-    elif (args[0] == "bez"):
-        if (len(args) != 3):
-            return 0,0,0,0,0,0
-        opcode = 1
-        rt = 0
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "bnez"):
-        if (len(args) != 3):
-            return 0,0,0,0,0,0
-        opcode = 1
-        rt = 1
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "bgez"):
-        if (len(args) != 3):
-            return 0,0,0,0,0,0
-        opcode = 1
-        rt = 2
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "blez"):
-        if (len(args) != 3):
-            return 0,0,0,0,0,0
-        opcode = 1
-        rt = 3
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "bgz"):
+    elif (args[0] == "beq"):
         if (len(args) != 3):
             return 0,0,0,0,0,0
         opcode = 1
         rt = 4
-        rs = int(args[1][1:])
-        imm = int(args[2])
-    elif (args[0] == "blz"):
+        rs = 8
+        imm = 3
+        FamilyI()
+    elif (args[0] == "bne"):
         if (len(args) != 3):
-            return 0
-        opcode = 1
-        rt = 5
-        rs = int(args[1][1:])
-        imm = int(args[2])
+            return 0,0,0,0,0,0
+        opcode = 5
+        rt = 9
+        rs = 8
+        imm = 3
+        FamilyI()
+    elif (args[0] == "addiu"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 9
+        rt = 8
+        rs = 9
+        imm = 3
+        FamilyI()
+    elif (args[0] == "addi"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 8
+        rt = 8
+        rs = 9
+        imm = 3
+        FamilyI()
+    elif (args[0] == "slti"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 10
+        rt = 8
+        rs = 9
+        imm = 3
+        FamilyI()
+    elif (args[0] == "sltiu"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 11
+        rt = 8
+        rs = 9
+        imm = 3
+        FamilyI()
+    elif (args[0] == "andi"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 12
+        rt = 8
+        rs = 9
+        imm = 3
+        FamilyI()
+    elif (args[0] == "ori"):
+        if (len(args) != 3):
+            return 0,0,0,0,0,0
+        opcode = 13
+        rt = 8
+        rs = 9
+        imm = 3 
+        FamilyI()
+    elif (args[0] == "lui"):
+        if (len(args) != 2):
+            return 0,0,0,0,0,0
+        opcode = 15
+        rt = 8
+        rs = 0
+        imm = 3 
+        FamilyI()             
     elif (args[0] == "lw"):
         if (args[-1] == ''):
             args = args[0:-1]
         if (len(args) != 3 and len(args) != 4):
             return 0,0,0,0,0,0
-        opcode = 2
-        rt = int(args[1][1:])
-        if (len(args) == 3):
-            imm = 0
-            rs = int(args[2][1:])
-        else:
-            imm = int(args[2])
-            rs = int(args[3][1:])
+        opcode = 35
+        rt = 8
+        imm = 4
+        rs = 9
+        FamilyI()
     elif (args[0] == "sw"):
         if (args[-1] == ''):
             args = args[0:-1]
         if (len(args) != 3 and len(args) != 4):
             return 0,0,0,0,0,0
+        opcode = 43
+        rt = 8
+        imm = 4
+        rs = 9
+        FamilyI()
+    elif (args[0] == "j"):
+        if (len(args) != 2):
+            return 0,0,0,0,0,0
         opcode = 3
-        rt = int(args[1][1:])
-        if (len(args) == 3):
-            imm = 0
-            rs = int(args[2][1:])
-        else:
-            imm = int(args[2])
-            rs = int(args[3][1:])
+        adress = args[1][2]
+        FamilyJ()         
+    elif (args[0] == "jal"):
+        if (len(args) != 2):
+            return 0,0,0,0,0,0
+        opcode = 2
+        adress = args[1][2]
+        FamilyJ()    
     else:
         return 0,0,0,0,0,0
     return opcode, rs, rt, rd, func, imm
@@ -234,8 +352,8 @@ def FamilyI():
     numeroBinario= opcode << rs << rt << constante
     return numeroBinario
     
-def FamilyI():
+def FamilyJ():
     opcodeFR = opcode
     adress   
-    numeroBinario= opcode << adress
+    numeroBinario = opcode << adress
     return numeroBinario
