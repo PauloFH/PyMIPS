@@ -3,4 +3,5 @@ import montador
 
 asms = open("test.asm")
 asm = asms.readlines()
-montador.asmtobinandhex(asm)
+numeroBinDaLinha = montador.asmtobin(asm)
+numeroHexDaLinha = montador.bintohex(numeroBinDaLinha)
