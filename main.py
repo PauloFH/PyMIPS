@@ -8,3 +8,4 @@ class main:
             args.append(LineAsm[x])
         print(args[x])
         print()
+        
