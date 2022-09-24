@@ -1,5 +1,6 @@
 import re
 
+
 def regToBin(registrador):
     if registrador == "$zero":
         return "0"
@@ -35,33 +36,14 @@ def regToBin(registrador):
         return "14"
     if registrador == "$t7" or registrador == "$15":
         return "15"
-    #if isinstance(reg, int):
-        if codeFormat == "R":
-            reg = format(reg, 'b').zfill(5)
-            if reg.find('-') != -1:
-                reg.replace('b', '0')
-                reg.replace('-', '0')
-                reg.replace('0', '2')
-                reg.replace('1', '0')
-                reg.replace('2', '1')
-            return reg
-        if codeFormat == "I":
-            reg = format(reg, 'b').zfill(16)
-            if reg.find('-') != -1:
-                reg = reg.replace('b', '0')
-                reg = reg.replace('-', '0')
-                reg = reg.replace('0', '2')
-                reg = reg.replace('1', '0')
-                reg = reg.replace('2', '1')
-            return reg
-        #quero entender essa função que ele criou
-        
+
 
 def asmtobin(asm):
-    asm_split = re.split(",|\(|\)", asm)
+    for lines in asm:
+        asm_split = re.split()
     args = []
     for i in range(len(asm_split)):
-        if (asm_split[i] != ""):
+        if asm_split[i] != "":
             args.append(asm_split[i])
     opcode = 0
     func = 0
@@ -80,7 +62,7 @@ def asmtobin(asm):
         rd = regToBin(args[1][1])
         rs = regToBin(args[1][2])
         rt = 0
-        shamt = regToBin(args[1][3])    
+        shamt = regToBin(args[1][3])
         numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
     if (args[0] == "srl"):
         if (len(args) != 4):
@@ -131,7 +113,7 @@ def asmtobin(asm):
         rs = regToBin(args[1][2])
         rt = regToBin(args[1][3])
         shamt = 0
-        numeroEmBinario =  FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
     elif (args[0] == "jr"):
         if (len(args) != 1):
             return 0, 0, 0, 0, 0, 0
@@ -141,7 +123,7 @@ def asmtobin(asm):
         rs = regToBin(args[1][1])
         rt = 0
         shamt = 0
-        numeroEmBinario =  FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
     elif (args[0] == "mfhi"):
         if (len(args) != 1):
             return 0, 0, 0, 0, 0, 0
@@ -355,15 +337,16 @@ def asmtobin(asm):
             return 0, 0, 0, 0, 0, 0
         opcode = 2
         adress = args[1][2]
-        #tem que fazer a verificação se adress é uma label e o endereço dela
+        # tem que fazer a verificação se address é uma label e o endereço dela
         numeroEmBinario = FamilyJ(opcode, adress)
     else:
         return 0
     return numeroEmBinario
 
+
 def bintohex(numeroEmBinario):
     num = int(numeroEmBinario, 2)
-    return(format(num, 'x'))
+    return format(num, 'x')
 
 
 def FamilyR(opcode, rt, rs, rd, func, shamt):
