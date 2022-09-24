@@ -1,7 +1,7 @@
 import re
 
 
-def asmtobin(asm):
+def asmtobinandhex(asm):
     asm_split = re.split(",|\(|\)", asm)
     args = []
     for i in range(len(asm_split)):
@@ -15,6 +15,8 @@ def asmtobin(asm):
     shamt = 0
     imm = 0
     adress = 0
+    numeroEmBinario = 0
+    numeroEmHexadecimal = 0
     if (args[0] == "sll"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -24,7 +26,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 3
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     if (args[0] == "srl"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -34,7 +37,8 @@ def asmtobin(asm):
         rs = 3
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "add"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -44,7 +48,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "sub"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -54,7 +59,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "and"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -64,7 +70,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "or"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -74,7 +81,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario =  FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "jr"):
         if (len(args) != 1):
             return 0, 0, 0, 0, 0, 0
@@ -84,7 +92,8 @@ def asmtobin(asm):
         rs = 8
         rt = 0
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario =  FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "mfhi"):
         if (len(args) != 1):
             return 0, 0, 0, 0, 0, 0
@@ -94,7 +103,8 @@ def asmtobin(asm):
         rs = 0
         rt = 0
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "mflo"):
         if (len(args) != 1):
             return 0, 0, 0, 0, 0, 0
@@ -104,8 +114,8 @@ def asmtobin(asm):
         rs = 8
         rt = 0
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
-
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "mult"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -115,7 +125,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "multu"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -125,7 +136,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "div"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -135,7 +147,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "divu"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -145,8 +158,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
-
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "addu"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -156,7 +169,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "subu"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -166,7 +180,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "slt"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -176,7 +191,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "sltu"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -186,7 +202,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "mul"):
         if (len(args) != 4):
             return 0, 0, 0, 0, 0, 0
@@ -196,8 +213,8 @@ def asmtobin(asm):
         rs = 9
         rt = 10
         shamt = 0
-        FamilyR(opcode, rt, rs, rd, func, shamt)
-
+        numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+        numeroEmHexadecimal = FamilyRHex(opcode,rs,rt,rd,func,shamt)
     elif (args[0] == "beq"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -205,7 +222,8 @@ def asmtobin(asm):
         rt = 4
         rs = 8
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "bne"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -213,7 +231,8 @@ def asmtobin(asm):
         rt = 9
         rs = 8
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "addiu"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -221,7 +240,8 @@ def asmtobin(asm):
         rt = 8
         rs = 9
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "addi"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -229,7 +249,8 @@ def asmtobin(asm):
         rt = 8
         rs = 9
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "slti"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -237,7 +258,8 @@ def asmtobin(asm):
         rt = 8
         rs = 9
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "sltiu"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -245,7 +267,8 @@ def asmtobin(asm):
         rt = 8
         rs = 9
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "andi"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -253,7 +276,8 @@ def asmtobin(asm):
         rt = 8
         rs = 9
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "ori"):
         if (len(args) != 3):
             return 0, 0, 0, 0, 0, 0
@@ -261,7 +285,8 @@ def asmtobin(asm):
         rt = 8
         rs = 9
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "lui"):
         if (len(args) != 2):
             return 0, 0, 0, 0, 0, 0
@@ -269,7 +294,8 @@ def asmtobin(asm):
         rt = 8
         rs = 0
         imm = 3
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "lw"):
         if (args[-1] == ''):
             args = args[0:-1]
@@ -279,7 +305,8 @@ def asmtobin(asm):
         rt = 8
         imm = 4
         rs = 9
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "sw"):
         if (args[-1] == ''):
             args = args[0:-1]
@@ -289,27 +316,35 @@ def asmtobin(asm):
         rt = 8
         imm = 4
         rs = 9
-        FamilyI(opcode, rt, rs, imm)
+        numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+        numeroEmHexadecimal = FamilyIHex(opcode,rs,rt,imm)
     elif (args[0] == "j"):
         if (len(args) != 2):
             return 0, 0, 0, 0, 0, 0
         opcode = 3
         adress = args[1][2]
-        FamilyJ(opcode, adress)
-
+        numeroEmBinario = FamilyJ(opcode, adress)
+        numeroEmHexadecimal =FamilyJHex(opcode,adress)
     elif (args[0] == "jal"):
         if (len(args) != 2):
             return 0, 0, 0, 0, 0, 0
         opcode = 2
         adress = args[1][2]
-        FamilyJ(opcode, adress)
-
+        numeroEmBinario = FamilyJ(opcode, adress)
+        numeroEmHexadecimal =FamilyJHex(opcode,adress)
     else:
         return 0, 0, 0, 0, 0, 0
-    return opcode, rs, rt, rd, func, imm
+    return numeroEmBinario, numeroEmHexadecimal
 
 
-def inttohex(opcode, rs, rt, rd, func, imm):
+def FamilyIHex(opcode, rs , rt, imm):
+    opcodeIHex = format(opcode, '02b')
+
+def FamilyJHex(opcode, adress):
+    opcodeJHex = format(opcode, '02b')
+
+
+def FamilyRHex(opcode, rs, rt, rd, func, imm):
     if (opcode == 0):
         opstr = format(opcode, '02b')
         rsstr = format(rs, '03b')
