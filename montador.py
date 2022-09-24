@@ -1,8 +1,8 @@
 import re
 
 
-def asmtoint(asm):
-    asm_split = re.split(" |, | \ (| \ )", asm)
+def asmtobin(asm):
+    asm_split = re.split(",|\(|\)", asm)
     args = []
     for i in range(len(asm_split)):
         if (asm_split[i] != ""):
@@ -317,7 +317,7 @@ def inttohex(opcode, rs, rt, rd, func, imm):
         rdstr = format(rd, '03b')
         fnstr = format(func, '05b')
 
-        instruction = opstr + rsstr + rtstr + rdstr + fnstr
+        instruction = hex(opstr + rsstr + rtstr + rdstr + fnstr)
     else:
         opstr = format(opcode, '02b')
         rtstr = format(rt, '03b')
@@ -333,27 +333,15 @@ def inttohex(opcode, rs, rt, rd, func, imm):
 
 
 def FamilyR(opcode, rt, rs, rd, func, shamt):
-    opcodeFR = opcode
-    rtFR = rt
-    rsFR = rs
-    rdFR = rd
-    shamtFR = shamt
-    func
-    numeroBinario = opcodeFR << rsFR << rtFR << rdFR << shamtFR << func
-    return numeroBinario
+    nb = bin(opcode << 26 | rs << 21 | rt << 16 | rd << 11 | shamt << 6 | func)
+    return nb
 
 
 def FamilyI(opcode, rt, rs, imm):
-    opcodeFR = opcode
-    rtFR = rt
-    rsFR = rs
-    constante = imm
-    numeroBinario = opcodeFR << rsFR << rtFR << constante
-    return numeroBinario
+    nb = bin(opcode << 26 | rs << 21 | rt << 16 | imm)
+    return nb
 
 
 def FamilyJ(opcode, adress):
-    opcodeFR = opcode
-    adressFR = adress
-    numeroBinario = opcodeFR << adressFR
-    return numeroBinario
+    nb = bin(opcode << 26 | adress)
+    return nb
