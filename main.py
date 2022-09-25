@@ -23,20 +23,16 @@ for line in asm:
                 else:
                     label += x
             else:
-                Str = line.strip(label)
+                strf = line.strip(label)
                 label += ':'
-    else:
         fun.append(strf.strip())
         inf.append(address)
+    else:  
+        fun.append(line.strip())
+        inf.append(address)
     address += 4
+print(fun)
 
-
-def lines():
-    lns = 0
-
-    pass
-
-
-numeroBinDaLinha = montador.asmtobin(asm)
-
-print(numeroBinDaLinha)
+bins = []
+montador.asmtobin(fun,bins)
+print(bins)
