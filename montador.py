@@ -1,5 +1,3 @@
-import re
-
 
 def regToBin(registrador):
     if registrador == "$zero":
@@ -38,12 +36,13 @@ def regToBin(registrador):
         return 15
 
 
-def asmtobin(fun, Bins):
+def asmtobin(fun, Bins, labels, inL):
     args = []
-    asm_split = []
+    theaddress = 4194304
     for lines in fun:
-         lines = lines.replace(',', '').replace('(', ' ').replace(')',' ').split()
-         args.append(lines)
+        lines = lines.replace(',', '').replace('(', ' ')\
+            .replace(')', ' ').split()
+        args.append(lines)
     print(args)
     opcode = 0
     func = 0
@@ -54,7 +53,7 @@ def asmtobin(fun, Bins):
     imm = 0
     adress = 0
     numeroEmBinario = 0
-    for lines in args: 
+    for lines in args:
         if (lines[0] == "sll"):
             if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
@@ -65,6 +64,7 @@ def asmtobin(fun, Bins):
             rt = 0
             shamt = regToBin(lines[3])
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         if (lines[0] == "srl"):
             if (len(lines) != 4):
@@ -76,6 +76,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[2])
             shamt = regToBin(lines[3])
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "add"):
             if (len(lines) != 4):
@@ -87,6 +88,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "sub"):
             if (len(lines) != 4):
@@ -98,6 +100,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "and"):
             if (len(lines) != 4):
@@ -109,6 +112,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "or"):
             if (len(lines) != 4):
@@ -120,6 +124,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "jr"):
             if (len(lines) != 1):
@@ -131,6 +136,7 @@ def asmtobin(fun, Bins):
             rt = 0
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "mfhi"):
             if (len(lines) != 1):
@@ -142,6 +148,7 @@ def asmtobin(fun, Bins):
             rt = 0
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "mflo"):
             if (len(lines) != 1):
@@ -153,6 +160,7 @@ def asmtobin(fun, Bins):
             rt = 0
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "mult"):
             if (len(lines) != 3):
@@ -164,6 +172,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[2])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "multu"):
             if (len(lines) != 3):
@@ -175,6 +184,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[2])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "div"):
             if (len(lines) != 3):
@@ -186,6 +196,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[2])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "divu"):
             if (len(lines) != 3):
@@ -197,6 +208,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[2])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "addu"):
             if (len(lines) != 4):
@@ -208,6 +220,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "subu"):
             if (len(lines) != 4):
@@ -219,6 +232,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "slt"):
             if (len(lines) != 4):
@@ -230,6 +244,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "sltu"):
             if (len(lines) != 4):
@@ -241,6 +256,7 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "mul"):
             if (len(lines) != 4):
@@ -252,87 +268,103 @@ def asmtobin(fun, Bins):
             rt = regToBin(lines[3])
             shamt = 0
             numeroEmBinario = FamilyR(opcode, rt, rs, rd, func, shamt)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "beq"):
-            if (len(lines) != 3):
+            if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
             opcode = 4
             rt = regToBin(lines[2])
             rs = regToBin(lines[1])
-            imm = regToBin(lines[3])
-            numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            for i in range(len(labels)):
+                if labels[i] == lines[3]:
+                    imm = negative(lines[3])
+                    numeroEmBinario = bin(opcode << 26 | rt << 21 | rs << 16)
+                    numeroEmBinario = numeroEmBinario[2:15]+imm
+                    numeroEmBinario = Formated(numeroEmBinario)
             Bins.append(numeroEmBinario)
         elif (lines[0] == "bne"):
-            if (len(lines) != 3):
+            if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
             opcode = 5
             rt = regToBin(lines[2])
             rs = regToBin(lines[1])
-            imm = regToBin(lines[3])
-            numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            if labels[i] == lines[1]:
+                imm = negative(lines[3])
+                numeroEmBinario = bin(opcode << 26 | rt << 21 | rs << 16)
+                numeroEmBinario = numeroEmBinario[2:15]+imm
+                numeroEmBinario = Formated(numeroEmBinario)
+
             Bins.append(numeroEmBinario)
         elif (lines[0] == "addiu"):
-            if (len(lines) != 3):
+            if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
             opcode = 9
             rt = regToBin(lines[1])
             rs = regToBin(lines[2])
-            imm = regToBin(lines[3])
+            imm = int(lines[3])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "addi"):
-            if (len(lines) != 3):
+            if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
             opcode = 8
             rt = regToBin(lines[1])
             rs = regToBin(lines[2])
-            imm = regToBin(lines[3])
+            imm = int(lines[3])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "slti"):
-            if (len(lines) != 3):
+            if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
             opcode = 10
             rt = regToBin(lines[1])
             rs = regToBin(lines[2])
-            imm = regToBin(lines[3])
+            imm = int(lines[3])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "sltiu"):
-            if (len(lines) != 3):
+            if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
             opcode = 11
             rt = regToBin(lines[1])
             rs = regToBin(lines[2])
-            imm = regToBin(lines[3])
+            imm = int(lines[3])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "andi"):
-            if (len(lines) != 3):
+            if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
             opcode = 12
             rt = regToBin(lines[1])
             rs = regToBin(lines[2])
-            imm = regToBin(lines[3])
+            imm = int(lines[3])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "ori"):
-            if (len(lines) != 3):
+            if (len(lines) != 4):
                 return 0, 0, 0, 0, 0, 0
             opcode = 13
             rt = regToBin(lines[1])
             rs = regToBin(lines[2])
-            imm = regToBin(lines[3])
+            imm = int(lines[3])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "lui"):
-            if (len(lines) != 2):
+            if (len(lines) != 3):
                 return 0, 0, 0, 0, 0, 0
             opcode = 15
             rt = regToBin(lines[1])
             rs = 0
             imm = regToBin(lines[2])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "lw"):
             if (args[-1] == ''):
@@ -344,6 +376,7 @@ def asmtobin(fun, Bins):
             rs = regToBin(lines[3])
             imm = regToBin(lines[2])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "sw"):
             if (args[-1] == ''):
@@ -355,28 +388,36 @@ def asmtobin(fun, Bins):
             rs = regToBin(lines[3])
             imm = regToBin(lines[2])
             numeroEmBinario = FamilyI(opcode, rt, rs, imm)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         elif (lines[0] == "j"):
             if (len(lines) != 2):
                 return 0, 0, 0, 0, 0, 0
             opcode = 3
-            adress = lines[2]
-            numeroEmBinario = FamilyJ(opcode, adress)
+            for i in range(len(labels)):
+                if labels[i] == lines[1]:
+                    address = (inL[i])/4
+                    address = bin(int(address)).zfill(26)
+                    address = address.replace("b", "0")
+            numeroEmBinario = bin(opcode << 26 | int(address, 2))
             Bins.append(numeroEmBinario)
         elif (lines[0] == "jal"):
             if (len(lines) != 2):
                 return 0, 0, 0, 0, 0, 0
             opcode = 2
-            adress = lines[2]
-            # tem que fazer a verificação se address é uma label e o endereço dela
+            for i in range(len(labels)):
+                if labels[i] == lines[1]:
+                    address = (inL[i])/4
+                    if address.find('-') != -1:
+                        negative(imm)
+                    else:
+                        address = address.replace("b", "0")
             numeroEmBinario = FamilyJ(opcode, adress)
+            numeroEmBinario = Formated(numeroEmBinario[2:])
             Bins.append(numeroEmBinario)
         else:
             return 0
-        print(Bins)
-        Bins.append(numeroEmBinario)
-        
-        
+        theaddress += 4
 
 
 def bintohex(numeroEmBinario):
@@ -384,16 +425,27 @@ def bintohex(numeroEmBinario):
     return format(num, 'x')
 
 
-def FamilyR(opcode,rt, rs, rd, func, shamt):
+def FamilyR(opcode, rt, rs, rd, func, shamt):
     nb = bin(opcode << 26 | rs << 21 | rt << 16 | rd << 11 | shamt << 6 | func)
     return nb
 
 
 def FamilyI(opcode, rt, rs, imm):
-    nb = bin(opcode << 26 | rs << 21 | rt << 16 | imm)
+    nb = bin(opcode << 26 | rs << 21 | rt << 16 | int(imm))
     return nb
 
 
 def FamilyJ(opcode, adress):
     nb = bin(opcode << 26 | adress)
     return nb
+
+
+def Formated(nb):
+    nb_new = len(nb)
+    a = 32-nb_new
+    return (("0"*a)+nb)
+
+
+def negative(bi):
+    s = bin(bi & int("1"*16, 2))[2:]
+    return ("{0:0>%s}" % (16)).format(s)

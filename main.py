@@ -1,12 +1,15 @@
+
+from typing import List
 import montador
 
 asms = open("test.asm")
 asm = asms.readlines()
+asms.close()
 labels = []  # Labels do codigo
 inL = []  # endereço das labels
 inf = []  # Endereço das funções
 fun = []  # funções
-address = 0x4000000
+address = 4194304
 label = ""
 strf = ""
 for line in asm:
@@ -27,12 +30,17 @@ for line in asm:
                 label += ':'
         fun.append(strf.strip())
         inf.append(address)
-    else:  
+    else:
         fun.append(line.strip())
         inf.append(address)
     address += 4
 print(fun)
 
-bins = []
-montador.asmtobin(fun,bins)
-print(bins)
+bins: List[int] = []
+montador.asmtobin(fun, bins, labels, inL)
+
+bin_return = open("return.bin.", 'w')
+
+for i in range(len(bins)):
+    bin_return.write(str(bins[i]) + '\n')
+bin_return.close()
