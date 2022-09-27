@@ -2,6 +2,7 @@
 # PyMIPS
 
 Assembly Compiler for MIPS architecture made in Python
+	(Made with Python 3.10.7)
 ## Instructions for run the program:
 
  - Download the complete folder
@@ -15,6 +16,7 @@ Assembly Compiler for MIPS architecture made in Python
  # 	PyMIPS
  
  Compilador assembly para estrutura MIPS feito em python
+	(Feito com Python 3.10.7)
 ## Instruções para rodar o programa:
 	- Baixar a pasta completa
 	- Renomear o código assembly para mips.asm dentro da pasta do projeto
@@ -27,6 +29,7 @@ Assembly Compiler for MIPS architecture made in Python
 # PyMIPS
 
 Assembly คอมไพเลอร์ สำหรับสถาปัตยกรรม MIPS ที่สร้างขึ้นใน Python
+	(สร้างด้วย Python 3.10.7)
 ## คำแนะนำในการรันโปรแกรม:
 
   - ดาวน์โหลดโฟลเดอร์ที่สมบูรณ์
