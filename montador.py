@@ -290,8 +290,8 @@ def asmtobin(fun, Bins, labels, inL):
             if (len(lines) != 4):
                 numeroEmBinario = FamilyR(0, 0, 0, 0, 0, 0)
             opcode = 5
-            rt = regToBin(lines[1])
-            rs = regToBin(lines[2])
+            rt = regToBin(lines[2])
+            rs = regToBin(lines[1])
             for i in range(len(labels)):
                 if (labels[i] == lines[3]):
                     newad = (inL[i] - (theaddress)) / 4
