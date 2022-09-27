@@ -3,7 +3,7 @@ from typing import List
 
 import montador
 
-asms = open("test.asm")
+asms = open("mips.asm")
 asm = asms.readlines()
 asms.close()
 bins: List[str] = []
