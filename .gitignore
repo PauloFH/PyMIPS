@@ -131,3 +131,6 @@ help/teste.py
 help/respostas.txt
 .vscode/launch.json
 help/funcoes.py
+help/binario.bin
+test.asm
+montador.py
