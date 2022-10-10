@@ -40,7 +40,7 @@ def asmtobin(fun, Bins, labels, inL):
     args = []
     theaddress = 4194304
     for lines in fun:
-        lines = lines.replace(',', '').replace('(', ' ').replace(')', ' ')\
+        lines = lines.replace(',', ' ').replace('(', ' ').replace(')', ' ')\
             .split()
         args.append(lines)
     opcode = 0
