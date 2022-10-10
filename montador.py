@@ -1,7 +1,7 @@
 
 
 def asmtobin(fun, Bins, labels, inL):
-    args = [] #vetor criado para salvar elementos das respectivas linhas
+    args = []  # vetor criado para salvar elementos das respectivas linhas
     theaddress = 4194304
     for lines in fun:
         lines = lines.replace(',', ' ').replace('(', ' ').replace(')', ' ')\
@@ -16,7 +16,9 @@ def asmtobin(fun, Bins, labels, inL):
     imm = 0
     address = 0
     numeroEmBinario = 0
-    for lines in args: #comparando o primeiro elemento das linhas com as instruções do MIPS, utilizando Ifs, If Elses e Elses
+    for lines in args:
+        # comparando o primeiro elemento das linhas com as
+        # instruções do MIPS, utilizando Ifs, If Elses e Elses
         if (lines[0] == "sll"):
             if (len(lines) != 4):
                 numeroEmBinario = FamilyR(0, 0, 0, 0, 0, 0)
@@ -387,33 +389,46 @@ def asmtobin(fun, Bins, labels, inL):
             Bins.append(numeroEmBinario)
         theaddress += 4
 
-def FamilyR(opcode, rt, rs, rd, func, shamt): #função criada para formatar o número binário específico das funções da família R
+
+def FamilyR(opcode, rt, rs, rd, func, shamt):
+    # função criada para formatar o número binário específico das funções da
+    # família R
     nb = bin(opcode << 26 | rs << 21 | rt << 16 | rd << 11 | shamt << 6 | func)
     return nb
 
 
-def FamilyI(opcode, rt, rs, imm): #função criada para formatar o número binário específico das funções da família I
+def FamilyI(opcode, rt, rs, imm):
+    # função criada para formatar o número binário específico das funções da
+    # família I
     nb = bin(opcode << 26 | rs << 21 | rt << 16 | int(imm))
     return nb
 
 
-def FamilyJ(opcode, adress): #função criada para formatar o número binário específico das funções da família J
+def FamilyJ(opcode, adress):
+    # função criada para formatar o número binário específico das
+    # funções da família J
     nb = bin(opcode << 26 | adress)
     return nb
 
 
-def Formated(nb): #função criada para formatar o binário em 32 bits
+def Formated(nb):
+    # função criada para formatar o binário em 32 bits
     nb_new = len(nb)
     a = 32-nb_new
     return (("0"*a)+nb)
 
 
-def negative(bi, num): #função criada para resolver o problema de binário negativo, convertendo-o da maneira correta
+def negative(bi, num):
+    # função criada para resolver o problema de binário negativo,
+    # convertendo-o da maneira correta
     bi = int(bi)
     s = bin(bi & int("1"*num, 2))[2:]
     return ("{0:0>%s}" % (num)).format(s)
 
-def regToBin(registrador): #função criada para descobrir o registrador utilizado e retornar seu código decimal correspondente
+
+def regToBin(registrador):
+    # função criada para descobrir o registrador utilizado e retornar
+    # seu código decimal correspondente
     if registrador == "$zero":
         return 0
     if registrador == "$s0" or registrador == "$16":
