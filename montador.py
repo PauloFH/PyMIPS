@@ -1,43 +1,7 @@
 
-def regToBin(registrador):
-    if registrador == "$zero":
-        return 0
-    if registrador == "$s0" or registrador == "$16":
-        return 16
-    if registrador == "$s1" or registrador == "$17":
-        return 17
-    if registrador == "$s2" or registrador == "$18":
-        return 18
-    if registrador == "$s3" or registrador == "$19":
-        return 19
-    if registrador == "$s4" or registrador == "$20":
-        return 20
-    if registrador == "$s5" or registrador == "$21":
-        return 21
-    if registrador == "$s6" or registrador == "$22":
-        return 22
-    if registrador == "$s7" or registrador == "$23":
-        return 23
-    if registrador == "$t0" or registrador == "$8":
-        return 8
-    if registrador == "$t1" or registrador == "$9":
-        return 9
-    if registrador == "$t2" or registrador == "$10":
-        return 10
-    if registrador == "$t3" or registrador == "$11":
-        return 11
-    if registrador == "$t4" or registrador == "$12":
-        return 12
-    if registrador == "$t5" or registrador == "$13":
-        return 13
-    if registrador == "$t6" or registrador == "$14":
-        return 14
-    if registrador == "$t7" or registrador == "$15":
-        return 15
-
 
 def asmtobin(fun, Bins, labels, inL):
-    args = []
+    args = [] #vetor criado para salvar elementos das respectivas linhas
     theaddress = 4194304
     for lines in fun:
         lines = lines.replace(',', ' ').replace('(', ' ').replace(')', ' ')\
@@ -52,7 +16,7 @@ def asmtobin(fun, Bins, labels, inL):
     imm = 0
     address = 0
     numeroEmBinario = 0
-    for lines in args:
+    for lines in args: #comparando o primeiro elemento das linhas com as instruções do MIPS, utilizando Ifs, If Elses e Elses
         if (lines[0] == "sll"):
             if (len(lines) != 4):
                 numeroEmBinario = FamilyR(0, 0, 0, 0, 0, 0)
@@ -423,34 +387,64 @@ def asmtobin(fun, Bins, labels, inL):
             Bins.append(numeroEmBinario)
         theaddress += 4
 
-
-def bintohex(numeroEmBinario):
-    num = int(numeroEmBinario, 2)
-    return format(num, 'x')
-
-
-def FamilyR(opcode, rt, rs, rd, func, shamt):
+def FamilyR(opcode, rt, rs, rd, func, shamt): #função criada para formatar o número binário específico das funções da família R
     nb = bin(opcode << 26 | rs << 21 | rt << 16 | rd << 11 | shamt << 6 | func)
     return nb
 
 
-def FamilyI(opcode, rt, rs, imm):
+def FamilyI(opcode, rt, rs, imm): #função criada para formatar o número binário específico das funções da família I
     nb = bin(opcode << 26 | rs << 21 | rt << 16 | int(imm))
     return nb
 
 
-def FamilyJ(opcode, adress):
+def FamilyJ(opcode, adress): #função criada para formatar o número binário específico das funções da família J
     nb = bin(opcode << 26 | adress)
     return nb
 
 
-def Formated(nb):
+def Formated(nb): #função criada para formatar o binário em 32 bits
     nb_new = len(nb)
     a = 32-nb_new
     return (("0"*a)+nb)
 
 
-def negative(bi, num):
+def negative(bi, num): #função criada para resolver o problema de binário negativo, convertendo-o da maneira correta
     bi = int(bi)
     s = bin(bi & int("1"*num, 2))[2:]
     return ("{0:0>%s}" % (num)).format(s)
+
+def regToBin(registrador): #função criada para descobrir o registrador utilizado e retornar seu código decimal correspondente
+    if registrador == "$zero":
+        return 0
+    if registrador == "$s0" or registrador == "$16":
+        return 16
+    if registrador == "$s1" or registrador == "$17":
+        return 17
+    if registrador == "$s2" or registrador == "$18":
+        return 18
+    if registrador == "$s3" or registrador == "$19":
+        return 19
+    if registrador == "$s4" or registrador == "$20":
+        return 20
+    if registrador == "$s5" or registrador == "$21":
+        return 21
+    if registrador == "$s6" or registrador == "$22":
+        return 22
+    if registrador == "$s7" or registrador == "$23":
+        return 23
+    if registrador == "$t0" or registrador == "$8":
+        return 8
+    if registrador == "$t1" or registrador == "$9":
+        return 9
+    if registrador == "$t2" or registrador == "$10":
+        return 10
+    if registrador == "$t3" or registrador == "$11":
+        return 11
+    if registrador == "$t4" or registrador == "$12":
+        return 12
+    if registrador == "$t5" or registrador == "$13":
+        return 13
+    if registrador == "$t6" or registrador == "$14":
+        return 14
+    if registrador == "$t7" or registrador == "$15":
+        return 15
