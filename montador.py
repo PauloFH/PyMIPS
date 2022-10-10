@@ -17,6 +17,9 @@ def asmtobin(fun, Bins, labels, inL):
     address = 0
     numeroEmBinario = 0
     for lines in args:
+        for i in labels:
+            if i in lines[0]:
+                del lines[0]
         # comparando o primeiro elemento das linhas com as
         # instruções do MIPS, utilizando Ifs, If Elses e Elses
         if (lines[0] == "sll"):
@@ -463,3 +466,6 @@ def regToBin(registrador):
         return 14
     if registrador == "$t7" or registrador == "$15":
         return 15
+    else:
+        registrador = registrador[1:]
+        return int(registrador)
