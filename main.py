@@ -2,8 +2,9 @@
 from typing import List
 
 import montador
+mipsint = input("Digite o nome do arquivo: (coloque a extensão .asm) ")
+asms = open(mipsint)
 
-asms = open("mips.asm")
 asm = asms.readlines()
 asms.close()
 bins: List[str] = []
