@@ -16,6 +16,8 @@ label = ""  # string criada para salvar as labels dentro da lista
 strf = ""  # string criada para salvar as funções do código
 for line in asm:
     # simulando a atividade do pc
+    if ('.' in line):
+        address -= 4
     if line.find(':') > 0:
         # quando encontrar um label na linha, a parte sem a label
         # será escrita na string de funções
