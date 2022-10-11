@@ -4,8 +4,7 @@ def asmtobin(fun, Bins, labels, inL):
     args = []  # vetor criado para salvar elementos das respectivas linhas
     theaddress = 4194304
     for lines in fun:
-        lines = lines.replace(',', ' ').replace('(', ' ').replace(')', ' ')\
-            .split()
+        lines = lines.replace(',', ' ').replace('(', ' ').replace(')', ' ').split()
         args.append(lines)
     opcode = 0
     func = 0
